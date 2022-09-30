@@ -29,13 +29,18 @@ body {
   flex-wrap: wrap;
 }
 
-.input {
+#input {
   margin: 1rem;
   width: 10rem;
 }
 
-.submit {
+#submit {
   background-color: aquamarine;
+  margin: 1rem;
+  width: 10rem;
+}
+
+#output {
   margin: 1rem;
   width: 10rem;
 }
