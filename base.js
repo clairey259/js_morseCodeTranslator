@@ -52,7 +52,9 @@ const englishMorseCodeLibrary = {
   x: "-..-",
   y: "-.--",
   z: "--..",
-  " ": " ",
+  " ": "/",
+  "/": " ",
+  "": "",
 };
 
 //CREATING THE OBJECT
@@ -65,29 +67,48 @@ class Translator {
   inputToArr() {
     const inputArr = this.input.split("");
     if (inputArr[0] === "." || inputArr[0] === "-") {
-      console.log(this.input.split(" "));
-      return this.input.split(" ");
+      const splitWordsArr = this.input.split("/");
+      const splitLettersArr = splitWordsArr.map((words) => {
+        return words.split(" ");
+      });
+      console.log(splitLettersArr);
+      return splitLettersArr;
     } else {
-      console.log(inputArr);
-      return inputArr;
+      const inputLowerCase = this.input.toLowerCase();
+      const splitWordsArr = inputLowerCase.split(" ");
+      const splitLettersArr = splitWordsArr.map((words) => {
+        return words.split("");
+      });
+      console.log(splitLettersArr);
+      return splitLettersArr;
     }
   }
 
   parseInputToOtherLanguage() {
-    console.log(this.inputToArr());
-    return this.inputToArr().map((item) => {
-      console.log(item);
-      return this.library[item];
+    const translatedArr = this.inputToArr().map((word) => {
+      return word.map((letter) => {
+        return this.library[letter];
+      });
     });
+    console.log(translatedArr);
+    return translatedArr;
   }
 
   condensedArrtoString() {
     console.log(this.parseInputToOtherLanguage());
-    const firstCharacter = this.parseInputToOtherLanguage()[0].split("");
-    if (firstCharacter[0] === "." || firstCharacter[0] === "-") {
-      return this.parseInputToOtherLanguage().join(" ");
+    const jointString = this.parseInputToOtherLanguage().join("");
+    const jointArr = jointString.split("");
+    console.log(jointArr[0]);
+    if (jointArr[0] === "." || jointArr[0] === "-") {
+      const joinLettersArr = this.parseInputToOtherLanguage().map((word) =>
+        word.join(" ")
+      );
+      return joinLettersArr.join(" / ");
     } else {
-      return this.parseInputToOtherLanguage().join("");
+      const joinLettersArr = this.parseInputToOtherLanguage().map((word) =>
+        word.join("")
+      );
+      return joinLettersArr.join(" ");
     }
   }
 }
@@ -97,16 +118,13 @@ const textInput = document.getElementById("input");
 const textOutput = document.getElementById("output");
 const translateButton = document.getElementById("submit");
 
-
-
 // SET UP EVENT LISTENERS
 translateButton.addEventListener("click", () => {
-  const translateInput = new Translator(englishMorseCodeLibrary, textInput.value);
+  const translateInput = new Translator(
+    englishMorseCodeLibrary,
+    textInput.value
+  );
   textOutput.innerText = translateInput.condensedArrtoString();
 });
 
 console.log(textInput.value);
-
-// function translate(library, input) {
-//   return Object.keys(library).find((key) => library[key] === input);
-// }

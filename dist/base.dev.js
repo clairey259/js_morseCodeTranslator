@@ -60,7 +60,9 @@ var englishMorseCodeLibrary = {
   x: "-..-",
   y: "-.--",
   z: "--..",
-  " ": " "
+  " ": "/",
+  "/": " ",
+  "": ""
 }; //CREATING THE OBJECT
 
 var Translator =
@@ -79,11 +81,23 @@ function () {
       var inputArr = this.input.split("");
 
       if (inputArr[0] === "." || inputArr[0] === "-") {
-        console.log(this.input.split(" "));
-        return this.input.split(" ");
+        var splitWordsArr = this.input.split("/");
+        var splitLettersArr = splitWordsArr.map(function (words) {
+          return words.split(" ");
+        });
+        console.log(splitLettersArr);
+        return splitLettersArr;
       } else {
-        console.log(inputArr);
-        return inputArr;
+        var inputLowerCase = this.input.toLowerCase();
+
+        var _splitWordsArr = inputLowerCase.split(" ");
+
+        var _splitLettersArr = _splitWordsArr.map(function (words) {
+          return words.split("");
+        });
+
+        console.log(_splitLettersArr);
+        return _splitLettersArr;
       }
     }
   }, {
@@ -91,22 +105,33 @@ function () {
     value: function parseInputToOtherLanguage() {
       var _this = this;
 
-      console.log(this.inputToArr());
-      return this.inputToArr().map(function (item) {
-        console.log(item);
-        return _this.library[item];
+      var translatedArr = this.inputToArr().map(function (word) {
+        return word.map(function (letter) {
+          return _this.library[letter];
+        });
       });
+      console.log(translatedArr);
+      return translatedArr;
     }
   }, {
     key: "condensedArrtoString",
     value: function condensedArrtoString() {
       console.log(this.parseInputToOtherLanguage());
-      var firstCharacter = this.parseInputToOtherLanguage()[0].split("");
+      var jointString = this.parseInputToOtherLanguage().join("");
+      var jointArr = jointString.split("");
+      console.log(jointArr[0]);
 
-      if (firstCharacter[0] === "." || firstCharacter[0] === "-") {
-        return this.parseInputToOtherLanguage().join(" ");
+      if (jointArr[0] === "." || jointArr[0] === "-") {
+        var joinLettersArr = this.parseInputToOtherLanguage().map(function (word) {
+          return word.join(" ");
+        });
+        return joinLettersArr.join(" / ");
       } else {
-        return this.parseInputToOtherLanguage().join("");
+        var _joinLettersArr = this.parseInputToOtherLanguage().map(function (word) {
+          return word.join("");
+        });
+
+        return _joinLettersArr.join(" ");
       }
     }
   }]);
@@ -123,6 +148,4 @@ translateButton.addEventListener("click", function () {
   var translateInput = new Translator(englishMorseCodeLibrary, textInput.value);
   textOutput.innerText = translateInput.condensedArrtoString();
 });
-console.log(textInput.value); // function translate(library, input) {
-//   return Object.keys(library).find((key) => library[key] === input);
-// }
+console.log(textInput.value);

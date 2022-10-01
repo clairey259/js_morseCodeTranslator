@@ -1,46 +1,43 @@
 * {
   padding: 0;
   margin: 0;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   color: #010101;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  margin: 3rem;
-}
-
-.cardContainer {
-  display: flex;
-  flex-direction: row;
-  max-width: fit-content;
-  margin: 1rem;
-  justify-content: center;
+  display: grid;
   justify-items: center;
-  justify-self: center;
+  align-items: center;
 }
-
-.translateCard {
+body #heading {
+  text-align: center;
+  margin: 2rem;
+  font-family: monospace;
+  font-size: 2rem;
+}
+body .translateCard {
+  justify-content: center;
   display: flex;
   flex-direction: column;
-  max-width: 30vw;
-  margin: 1rem;
-  flex-wrap: wrap;
+  max-width: 50vw;
+  margin: 2rem;
 }
-
-#input {
-  margin: 1rem;
-  width: 10rem;
+body .translateCard h4 {
+  text-align: center;
+  font-size: 1rem;
 }
-
-#submit {
-  background-color: aquamarine;
-  margin: 1rem;
-  width: 10rem;
+body .translateCard #input {
+  margin: 2rem;
+  margin-left: 0;
+  width: 100%;
 }
-
-#output {
+body .translateCard #submit {
+  width: 100%;
+}
+body #output {
+  text-align: center;
   margin: 1rem;
-  width: 10rem;
+  width: 90vw;
+  font-size: 1.5rem;
 }
