@@ -1,6 +1,6 @@
 # js_morseCodeTranslator
 
-This is a _nology Challenge from Module 4 - JavaScript Advanced & Testing
+This is a _nology Challenge from Module 4 - "JavaScript Advanced & Testing"
 
 The Brief:
 Create a morse code translator using OOP
