@@ -73,7 +73,7 @@ class Translator {
       });
       console.log(splitLettersArr);
       return splitLettersArr;
-    } else {
+    } else  if (inputArr[0].toLowerCase() !== inputArr[0].toUpperCase()) {
       const inputLowerCase = this.input.toLowerCase();
       const splitWordsArr = inputLowerCase.split(" ");
       const splitLettersArr = splitWordsArr.map((words) => {
@@ -81,6 +81,8 @@ class Translator {
       });
       console.log(splitLettersArr);
       return splitLettersArr;
+    } else {
+      alert ('Incorrect Input. Please insert morse code or english')
     }
   }
 
